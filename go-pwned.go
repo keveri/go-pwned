@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"go-pwned/internal/api"
+	"go-pwned/internal/reporting"
 	"io/ioutil"
 	"os"
 	"strings"
@@ -29,23 +29,6 @@ func readEmails(fileName string) []string {
 	return filterNonEmpty(lines)
 }
 
-func processEmail(email string) {
-	breaches, err := api.GetAllBreachesForEmail(email)
-	if err != nil {
-		fmt.Printf("API call failed with error %s\n", err)
-		os.Exit(1)
-	}
-	pastes, err := api.GetAllPastesForEmail(email)
-	if err != nil {
-		fmt.Printf("API call failed with error %s\n", err)
-		os.Exit(1)
-	}
-	fmt.Println(email)
-	fmt.Println(breaches)
-	fmt.Println(pastes)
-	fmt.Println("-------")
-}
-
 func main() {
 	if len(os.Args) <= 1 {
 		fmt.Printf("USAGE : %s <file_with_emails> \n", os.Args[0])
@@ -54,8 +37,11 @@ func main() {
 
 	fileName := os.Args[1]
 	emails := readEmails(fileName)
+	report := reporting.GenerateReport(emails)
 
-	for _, email := range emails {
-		processEmail(email)
-	}
+	textReport := reporting.PrintableReport(report)
+	fmt.Println(textReport)
+
+	jsonReport := reporting.JsonReport(report)
+	fmt.Println(jsonReport)
 }

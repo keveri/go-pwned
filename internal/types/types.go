@@ -1,5 +1,9 @@
 package types
 
+import (
+	"time"
+)
+
 type Breach struct {
 	Name         string   `json:"Name"`
 	Title        string   `json:"Title"`
@@ -24,4 +28,17 @@ type Paste struct {
 	Title      string `json:"Title"`
 	Date       string `json:"Date"` // date
 	EmailCount int    `json:"EmailCount"`
+}
+
+// NOTE: golang json package doesn't yet support empty arrays and converts them
+//  	 to nil in json output. issue: https://github.com/golang/go/issues/31811
+type Finding struct {
+	Email    string   `json:"Email"`
+	Breaches []Breach `json:"Breaches"`
+	Pastes   []Paste  `json:"Pastes"`
+}
+
+type Report struct {
+	Date     time.Time `json:"Date"`
+	Findings []Finding `json:"Findings"`
 }
