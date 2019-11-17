@@ -28,6 +28,7 @@ func callAPI(path string) ([]byte, error) {
 	addHeaders(request)
 
 	resp, err := client.Do(request)
+	// TODO: status code checking
 	if err != nil {
 		return nil, err
 	} else {
@@ -44,5 +45,16 @@ func GetAllBreachesForEmail(email string) ([]Breach, error) {
 		var breaches []Breach
 		json.Unmarshal(data, &breaches)
 		return breaches, nil
+	}
+}
+
+func GetAllPastesForEmail(email string) ([]Paste, error) {
+	data, err := callAPI("pasteaccount/" + email)
+	if err != nil {
+		return nil, err
+	} else {
+		var pastes []Paste
+		json.Unmarshal(data, &pastes)
+		return pastes, nil
 	}
 }

@@ -35,8 +35,14 @@ func processEmail(email string) {
 		fmt.Printf("API call failed with error %s\n", err)
 		os.Exit(1)
 	}
+	pastes, err := api.GetAllPastesForEmail(email)
+	if err != nil {
+		fmt.Printf("API call failed with error %s\n", err)
+		os.Exit(1)
+	}
 	fmt.Println(email)
 	fmt.Println(breaches)
+	fmt.Println(pastes)
 	fmt.Println("-------")
 }
 

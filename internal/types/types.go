@@ -17,3 +17,11 @@ type Breach struct {
 	IsSpamList   bool     `json:"IsSpamList"`
 	LogoPath     string   `json:"LogoPath"`
 }
+
+type Paste struct {
+	Source     string `json:"Source"`
+	Id         string `json:"Id"`
+	Title      string `json:"Title"`
+	Date       string `json:"Date"` // date
+	EmailCount int    `json:"EmailCount"`
+}
