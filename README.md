@@ -10,4 +10,4 @@ Emails should be in a file. One email per line. The file is provided as argument
 
 ## Run
 
-Execute: `GO_PWNED_API_KEY=$(cat api_key.txt) go run pwned.go emails.txt`
+Execute: `GO_PWNED_API_KEY=$(cat api_key.txt) go run go-pwned.go emails.txt`
