@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"go-pwned/internal/reporting"
 	"io/ioutil"
@@ -29,19 +30,43 @@ func readEmails(fileName string) []string {
 	return filterNonEmpty(lines)
 }
 
+func stringInSlice(a string, list []string) bool {
+	for _, b := range list {
+		if b == a {
+			return true
+		}
+	}
+	return false
+}
+
+func validArguments(filepath string, format string) bool {
+	if _, err := os.Stat(filepath); os.IsNotExist(err) {
+		fmt.Println("ERROR: Given filepath not found!")
+		os.Exit(2)
+	}
+	validFormats := []string{"text", "json"}
+	return (filepath != "") && stringInSlice(format, validFormats)
+}
+
 func main() {
-	if len(os.Args) <= 1 {
-		fmt.Printf("USAGE : %s <file_with_emails> \n", os.Args[0])
-		os.Exit(0)
+	filepath := flag.String("input", "", "filepath to email list")
+	format := flag.String("format", "text", "output format. possible values: json, text")
+	flag.Parse()
+
+	if !(validArguments(*filepath, *format)) {
+		flag.Usage()
+		os.Exit(1)
 	}
 
-	fileName := os.Args[1]
-	emails := readEmails(fileName)
+	emails := readEmails(*filepath)
 	report := reporting.GenerateReport(emails)
 
-	textReport := reporting.PrintableReport(report)
-	fmt.Println(textReport)
-
-	jsonReport := reporting.JsonReport(report)
-	fmt.Println(jsonReport)
+	switch *format {
+	case "json":
+		jsonReport := reporting.JsonReport(report)
+		fmt.Println(jsonReport)
+	default:
+		textReport := reporting.PrintableReport(report)
+		fmt.Println(textReport)
+	}
 }
