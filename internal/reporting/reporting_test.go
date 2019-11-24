@@ -3,7 +3,7 @@ package reporting_test
 import (
 	"testing"
 	"github.com/stretchr/testify/assert"
-	. "go-pwned/internal/reporting"
+	. "github.com/keveri/go-pwned/internal/reporting"
 )
 
 func Test_GenerateReport(t *testing.T) {

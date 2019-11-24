@@ -2,7 +2,7 @@ package templates
 
 import (
 	"fmt"
-	. "go-pwned/internal/types"
+	. "github.com/keveri/go-pwned/internal/types"
 	"strings"
 )
 

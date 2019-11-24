@@ -2,7 +2,7 @@ package api
 
 import (
 	"encoding/json"
-	. "go-pwned/internal/types"
+	. "github.com/keveri/go-pwned/internal/types"
 	"io/ioutil"
 	"net/http"
 	"os"

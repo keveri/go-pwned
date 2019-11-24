@@ -3,9 +3,9 @@ package reporting
 import (
 	"encoding/json"
 	"fmt"
-	"go-pwned/internal/api"
-	"go-pwned/internal/reporting/templates"
-	. "go-pwned/internal/types"
+	"github.com/keveri/go-pwned/internal/api"
+	"github.com/keveri/go-pwned/internal/reporting/templates"
+	. "github.com/keveri/go-pwned/internal/types"
 	"os"
 	"strings"
 	"time"

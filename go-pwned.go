@@ -3,7 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
-	"go-pwned/internal/reporting"
+	"github.com/keveri/go-pwned/internal/reporting"
 	"io/ioutil"
 	"os"
 	"strings"
