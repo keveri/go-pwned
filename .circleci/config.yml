@@ -1,0 +1,25 @@
+version: 2
+
+jobs:
+  build:
+    docker:
+      - image: circleci/golang:1.12
+    working_directory: /go/src/github.com/keveri/go-pwned
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - go-pwned-cache
+      - run:
+          name: Setup
+          command: ./bin/install_dependencies.sh
+      - run:
+          name: Test
+          command: ./bin/test.sh
+      - run:
+          name: Build
+          command: go build
+      - save_cache:
+          key: go-pwned-cache
+          paths:
+            - "/go/pkg"

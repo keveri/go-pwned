@@ -19,8 +19,14 @@ Get API key for the haveibeenpwned API from [here](https://haveibeenpwned.com/AP
 
 Emails should be in a file. One email per line. The file is provided as argument.
 
+Install dependencies: `./bin/install_dependencies.sh`
+
 ## Run
 
 Execute: `GO_PWNED_API_KEY=$(cat api_key.txt) go run go-pwned.go -input emails.txt`
 
 Default output format is `text`, but json can also be outputted with flag `-format json`.
+
+## Test
+
+`./bin/test.sh`
